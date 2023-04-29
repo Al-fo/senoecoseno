@@ -10,6 +10,14 @@ import javafx.scene.control.Slider;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.paint.Color;
 
+/**
+ * @author Lorenzo Gori
+ * Date: 30/04/2023
+ * Class controller.
+ * Sets one of the three goniomethric function and draws them graphic,
+ * possible choises: sin(x),cos(x),tan(x).
+ * it can also Zoom in and out the X and the Y axis
+ */
 public class Controller {
     enum function{
         SIN,
@@ -39,6 +47,10 @@ public class Controller {
     @FXML
     ToggleGroup group;
 
+    /**
+     * method initialize
+     * Initializes the graphic components of javafx and binds the sliders with a ChangeListener
+     */
     @FXML
     private void initialize(){
         graphicContext = canvas.getGraphicsContext2D();
@@ -68,6 +80,11 @@ public class Controller {
         repaint();
     }
 
+    /**
+     * method drawPlane
+     * Draws the base cartisian plane, if it's going to be a tan(x) plane, it will be different 
+     * compared to the sin(x) and cos(x) plane
+     */
     private void drawPlane(){
         graphicContext.setStroke(Color.WHITE);
         graphicContext.setLineWidth(1);
@@ -91,6 +108,10 @@ public class Controller {
         }
     }
 
+    /**
+     * method drawSin
+     * Changes the function to sin(x)
+     */
     @FXML
     private void drawSin(){
         type = function.SIN;
@@ -99,6 +120,10 @@ public class Controller {
         repaint();
     }
 
+    /**
+     * method drawCos
+     * Changes the function to cos(x)
+     */
     @FXML
     private void drawCos(){
         type = function.COS;
@@ -107,6 +132,10 @@ public class Controller {
         repaint();
     }
 
+    /**
+     * method drawtan
+     * Changes the function to tan(x)
+     */
     @FXML
     private void drawTan(){
         type = function.TAN;
@@ -115,6 +144,10 @@ public class Controller {
         repaint();
     }
 
+    /**
+     * method repaint
+     * Paints the set function over the plane after cleaning it from the one before
+     */
     private void repaint(){
         clearView();
         drawPlane();
@@ -163,12 +196,20 @@ public class Controller {
             }
     }
 
+    /**
+     * method clearView
+     * Clears the view from the previous paints
+     */
     private void clearView(){
         graphicContext.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
         graphicContext.setFill(Color.BLACK);
         graphicContext.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
     }
 
+    /**
+     * method clear
+     * Clears the screen and the selections
+     */
     @FXML
     private void clear(){
         sin.setSelected(false);
